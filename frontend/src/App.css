@@ -1,0 +1,783 @@
+body {
+  background-color: #080911;
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.glass-header {
+  background: rgba(10, 11, 20, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+.clean-card {
+  background: #121424;
+  border: 1px solid #262a45;
+  border-radius: 1rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clean-card:hover {
+  border-color: rgba(225, 29, 72, 0.45);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(225, 29, 72, 0.15);
+}
+
+/* Red Dragon Crimson Sparks */
+.sparks-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.crimson-spark {
+  position: absolute;
+  background: radial-gradient(circle, #fda4af 0%, #e11d48 100%);
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: drop-shadow(0 0 6px rgba(225, 29, 72, 0.8));
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.7; }
+  100% { transform: translateY(-10px) scale(1.1); opacity: 0; }
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #080911; }
+::-webkit-scrollbar-thumb { background: #3b1d28; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #e11d48; }
+
+/* ============================================================
+   ✨ KUOHFLOW MOTION SYSTEM
+   ============================================================ */
+
+.brand-gradient-text {
+  background: linear-gradient(90deg, #fda4af, #e11d48, #f59e0b, #8b5cf6, #e11d48, #fda4af);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brandShimmer 6s ease-in-out infinite;
+}
+@keyframes brandShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.magic-circle-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transform: translate3d(calc(var(--parallax-x, 0) * -42px), calc(var(--parallax-y, 0) * -42px), 0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: circleGlow 12s ease-in-out infinite;
+}
+@keyframes circleGlow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* ============================================================
+   🌌 LIVING BACKGROUND — aura, starfield, shooting stars
+   ============================================================ */
+.aura-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auraDrift 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.aura-blob.a1 {
+  width: 42vw;
+  height: 42vw;
+  top: -12vw;
+  left: -10vw;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.18), transparent 65%);
+}
+.aura-blob.a2 {
+  width: 38vw;
+  height: 38vw;
+  bottom: -14vw;
+  right: -8vw;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16), transparent 65%);
+  animation-duration: 32s;
+  animation-delay: -8s;
+}
+@keyframes auraDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4vw, 3vw) scale(1.12); }
+  100% { transform: translate(-3vw, 2vw) scale(0.95); }
+}
+
+.stars-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.twinkle-star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.12; transform: scale(0.7); }
+  50% { opacity: 0.9; transform: scale(1.25); }
+}
+
+.shooting-star {
+  position: fixed;
+  top: 14%;
+  left: -10%;
+  width: 140px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fda4af, #fff);
+  border-radius: 9999px;
+  transform: rotate(18deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: shoot 9s ease-in infinite;
+}
+.shooting-star.s2 { top: 34%; animation-delay: 4.5s; animation-duration: 11s; }
+.shooting-star.s3 { top: 7%; animation-delay: 8s; animation-duration: 13s; }
+@keyframes shoot {
+  0% { transform: translateX(-10vw) rotate(18deg); opacity: 0; }
+  3% { opacity: 0.9; }
+  10% { transform: translateX(120vw) rotate(18deg); opacity: 0; }
+  100% { transform: translateX(120vw) rotate(18deg); opacity: 0; }
+}
+.magic-circle-bg svg {
+  position: absolute;
+  opacity: 0.06;
+}
+.magic-circle-bg .circle-1 { top: -12%; right: -8%; width: 46vw; height: 46vw; animation: spinSlow 90s linear infinite; }
+.magic-circle-bg .circle-2 { bottom: -14%; left: -10%; width: 38vw; height: 38vw; animation: spinSlow 70s linear infinite reverse; }
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cardRise {
+  0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.card-entrance {
+  animation: cardRise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes boostPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.55), 0 0 12px rgba(225,29,72,0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(225, 29, 72, 0), 0 0 22px rgba(225,29,72,0.55); }
+}
+.boost-pulse { animation: boostPulse 2.4s ease-in-out infinite; }
+
+.clean-card {
+  position: relative;
+  overflow: hidden;
+}
+.clean-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(225,29,72,0.10) 45%, rgba(139,92,246,0.10) 55%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.clean-card:hover::before {
+  transform: translateX(120%);
+}
+.clean-card:hover {
+  transform: translateY(-3px);
+}
+
+.kf-btn-primary {
+  transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.kf-btn-primary:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.kf-btn-primary:active { transform: translateY(0) scale(0.97); }
+
+@keyframes barShimmer {
+  0% { background-position: -120px 0; }
+  100% { background-position: 120px 0; }
+}
+.xp-shimmer {
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+  background-size: 120px 100%;
+  background-repeat: no-repeat;
+  animation: barShimmer 1.8s linear infinite;
+}
+
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-pop { animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================
+   💗 AI GIRLFRIEND — LIVING ANIME AVATAR & CHAT MOTION SUITE
+   ============================================================ */
+
+/* --- Living avatar stack (crossfading expressions) --- */
+.gf-avatar {
+  position: relative;
+  overflow: hidden;
+  background: #0d0f1c;
+  isolation: isolate;
+}
+.gf-avatar-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.7s ease, transform 1.4s ease;
+  will-change: opacity, transform;
+}
+.gf-avatar-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+.gf-avatar-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 48%, transparent 62%);
+  transform: translateX(-130%);
+  animation: gfShine 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gfShine {
+  0%, 55% { transform: translateX(-130%); }
+  85%, 100% { transform: translateX(130%); }
+}
+.gf-avatar-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 -34px 42px -22px rgba(8, 9, 17, 0.92), inset 0 0 0 1px rgba(225, 29, 72, 0.12);
+  pointer-events: none;
+}
+
+/* Breathing + speaking life */
+.gf-breathe {
+  animation: gfBreathe 3.8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+@keyframes gfBreathe {
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  50% { transform: scaleY(1.02) translateY(-1.5px); }
+}
+.gf-speaking {
+  animation: gfSpeak 1.1s ease-in-out infinite;
+}
+@keyframes gfSpeak {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035) translateY(-1px); }
+}
+
+/* --- Floating orb button (part 2) --- */
+.gf-orb-bob {
+  animation: gfBob 4s ease-in-out infinite;
+}
+@keyframes gfBob {
+  0% { transform: translateY(0); }
+  12% { transform: translateY(-6px); }
+  22% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+.gf-orb {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gf-orb:hover {
+  transform: scale(1.08) rotate(2deg);
+}
+.gf-orb:active {
+  transform: scale(0.95);
+}
+.gf-orb-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, #e11d48, #8b5cf6, #f59e0b, #e11d48);
+  animation: gfRingSpin 4.5s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(225, 29, 72, 0.55));
+}
+@keyframes gfRingSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.gf-orb-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 2px solid rgba(225, 29, 72, 0.75);
+  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35);
+  display: block;
+}
+.gf-orb-glow {
+  position: absolute;
+  inset: -12px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.45), transparent 70%);
+  animation: gfGlowPulse 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gfGlowPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+.gf-unread {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  border: 2px solid #080911;
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.7);
+  animation: gfPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes gfPop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Floating whisper bubble (part 1) --- */
+.gf-bubble {
+  position: relative;
+  max-width: 272px;
+  padding: 0.8rem 1rem;
+  border-radius: 1.1rem;
+  border-bottom-right-radius: 0.3rem;
+  background: rgba(22, 24, 42, 0.96);
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), 0 0 22px rgba(225, 29, 72, 0.12);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  animation: gfBubbleIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both, gfBubbleFloat 5.5s ease-in-out 0.7s infinite;
+}
+.gf-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  right: 22px;
+  width: 12px;
+  height: 12px;
+  background: rgba(22, 24, 42, 0.96);
+  border-right: 1px solid rgba(225, 29, 72, 0.4);
+  border-bottom: 1px solid rgba(225, 29, 72, 0.4);
+  transform: rotate(45deg);
+}
+@keyframes gfBubbleIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes gfBubbleFloat {
+  0% { transform: translateY(0); }
+  12% { transform: translateY(-4px); }
+  24% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+.gf-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 2px;
+  background: #fb7185;
+  vertical-align: -2px;
+  animation: gfCaret 1s steps(2) infinite;
+}
+@keyframes gfCaret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* --- Chat panel --- */
+.gf-panel {
+  animation: gfPanelIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  transform-origin: bottom right;
+}
+@keyframes gfPanelIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.gf-msg-in {
+  animation: gfMsgIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes gfMsgIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.gf-typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #fb7185;
+  animation: gfDot 1.2s ease-in-out infinite;
+}
+@keyframes gfDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+.gf-heart {
+  position: absolute;
+  bottom: 0;
+  color: #fb7185;
+  animation: gfHeartRise 2.4s ease-in forwards;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.8));
+}
+@keyframes gfHeartRise {
+  0% { opacity: 0; transform: translateY(0) scale(0.4) rotate(0deg); }
+  15% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-130px) scale(1.15) rotate(18deg); }
+}
+.gf-send-pulse {
+  animation: gfSendPulse 2s ease-in-out infinite;
+}
+@keyframes gfSendPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.5); }
+  50% { box-shadow: 0 0 0 7px rgba(225, 29, 72, 0); }
+}
+.gf-msg-image {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================================
+   👑 LEGENDARY ANIMATION SUITE
+   ============================================================ */
+.brand-legend-in {
+  animation: brandShimmer 6s ease-in-out infinite, brandLegendIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes brandLegendIn {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.8); filter: blur(10px) drop-shadow(0 0 18px rgba(225,29,72,0.9)); }
+  60% { filter: blur(0) drop-shadow(0 0 14px rgba(139,92,246,0.7)); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0) drop-shadow(0 0 0 rgba(225,29,72,0)); }
+}
+
+.header-legend-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e11d48 20%, #8b5cf6 50%, #f59e0b 80%, transparent);
+  background-size: 200% 100%;
+  animation: legendLine 3.2s linear infinite;
+  opacity: 0.85;
+}
+@keyframes legendLine {
+  to { background-position: -200% 0; }
+}
+
+.legend-rise {
+  animation: legendRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes legendRise {
+  from { opacity: 0; transform: translateY(26px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.legend-border {
+  position: relative;
+}
+.legend-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, rgba(225,29,72,0.65), rgba(139,92,246,0.45), rgba(245,158,11,0.55), rgba(225,29,72,0.65));
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  animation: gradientShift 4s linear infinite;
+  pointer-events: none;
+}
+.legend-border:hover::after {
+  opacity: 1;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.legendary-card:hover {
+  transform: translateY(-5px) scale(1.008) !important;
+  box-shadow: 0 18px 44px -10px rgba(0,0,0,0.75), 0 0 26px rgba(225,29,72,0.2) !important;
+}
+
+.legendary-btn {
+  background: linear-gradient(270deg, #e11d48, #8b5cf6, #f59e0b, #e11d48);
+  background-size: 300% 300%;
+  animation: gradientShift 5s ease infinite;
+}
+
+.legend-logo {
+  animation: legendLogo 3s ease-in-out infinite;
+}
+@keyframes legendLogo {
+  0%, 100% { box-shadow: 0 0 10px rgba(225, 29, 72, 0.4), inset 0 0 8px rgba(225,29,72,0.25); }
+  50% { box-shadow: 0 0 24px rgba(139, 92, 246, 0.6), inset 0 0 12px rgba(139,92,246,0.35); }
+}
+
+.legend-timer-running {
+  animation: legendTimerGlow 1.6s ease-in-out infinite;
+}
+@keyframes legendTimerGlow {
+  0%, 100% { box-shadow: 0 0 26px rgba(225, 29, 72, 0.25); }
+  50% { box-shadow: 0 0 60px rgba(225, 29, 72, 0.6), 0 0 22px rgba(139, 92, 246, 0.35); }
+}
+
+.gf-orb-ring-2 {
+  position: absolute;
+  inset: -9px;
+  border-radius: 9999px;
+  border: 1px dashed rgba(245, 158, 11, 0.55);
+  animation: gfRingSpin 7s linear infinite reverse;
+}
+
+/* ============================================================
+   👠 HOT WAIFU STROLLERS — appear at a side, cloud-bubble, leave
+   ============================================================ */
+.waifu-walker {
+  position: absolute;
+  height: 46vh;
+  max-height: 420px;
+  pointer-events: none;
+  transition: right 3.8s cubic-bezier(0.22, 1, 0.36, 1), left 3.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: right, left;
+}
+.waifu-side-right { right: -24vw; }
+.waifu-side-right.waifu-in { right: 3vw; }
+.waifu-side-left { left: -24vw; }
+.waifu-side-left.waifu-in { left: 3vw; }
+.waifu-side-left .waifu-bob img { transform: scaleX(-1); }
+.waifu-bob {
+  height: 100%;
+  animation: walkerBob 0.55s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+.waifu-bob img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.6));
+}
+@keyframes walkerBob {
+  from { transform: translateY(0) rotate(-1deg); }
+  to { transform: translateY(-7px) rotate(1.2deg); }
+}
+.waifu-walker-name {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 10px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(18, 20, 36, 0.88);
+  border: 1px solid rgba(225, 29, 72, 0.45);
+  color: #fda4af;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+/* Clouded speech bubble above the stroller */
+.waifu-cloud {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  min-width: 130px;
+  max-width: 200px;
+  padding: 10px 14px;
+  background: #fdf6ff;
+  color: #4c1d54;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
+  border-radius: 22px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(225, 29, 72, 0.06);
+  animation: cloudPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.waifu-cloud::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 16px;
+  width: 14px;
+  height: 14px;
+  background: #fdf6ff;
+  border-radius: 50%;
+}
+.waifu-cloud::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 24px;
+  width: 18px;
+  height: 18px;
+  background: #fdf6ff;
+  border-radius: 50%;
+}
+.waifu-cloud.cloud-out {
+  animation: cloudOut 0.6s ease both;
+}
+@keyframes cloudPop {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.8); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+@keyframes cloudOut {
+  from { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  to { opacity: 0; transform: translateX(-50%) translateY(8px) scale(0.88); }
+}
+
+/* ============================================================
+   🎛️ HEADER CONTROL DECK — chrono navigator, heroine, toggles
+   ============================================================ */
+.hc-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: linear-gradient(180deg, rgba(24, 27, 48, 0.94), rgba(14, 16, 30, 0.94));
+  border: 1px solid rgba(225, 29, 72, 0.28);
+  border-radius: 9999px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hc-toolbar:hover {
+  border-color: rgba(225, 29, 72, 0.5);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5), 0 0 18px rgba(225, 29, 72, 0.14);
+}
+.hc-icon-btn {
+  height: 34px;
+  min-width: 34px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  transition: transform 0.22s ease, color 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.3s ease;
+}
+.hc-icon-btn svg { width: 15px; height: 15px; }
+.hc-icon-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  color: #fda4af;
+  border-color: rgba(225, 29, 72, 0.45);
+  background: rgba(225, 29, 72, 0.07);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+.hc-icon-btn.is-active {
+  color: #fda4af;
+  border-color: rgba(225, 29, 72, 0.55);
+  background: rgba(225, 29, 72, 0.1);
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.18);
+}
+.hc-icon-wide { width: auto; padding: 0 12px; gap: 5px; }
+.hc-ics-label { font-size: 10px; font-weight: 800; }
+.hc-heroine { gap: 2px; }
+.hc-heroine-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 2px solid rgba(225, 29, 72, 0.6);
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.3);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.hc-heroine-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.5);
+}
+.hc-heroine-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 2px 4px 6px;
+  cursor: pointer;
+  max-width: 150px;
+}
+.hc-heroine-select:focus { outline: none; }
+.hc-heroine-select option { background: #121424; color: #fff; }
+.hc-chevron { width: 13px; height: 13px; color: #94a3b8; pointer-events: none; margin-right: 3px; }
+.hc-status-pill { padding: 6px 12px; cursor: default; user-select: none; }
+.hc-pill-icon { width: 13px; height: 13px; color: #94a3b8; }
+.hc-pill-icon.is-on { color: #fda4af; filter: drop-shadow(0 0 6px rgba(225, 29, 72, 0.6)); }
+.hc-pill-text { font-size: 10px; font-weight: 800; color: #cbd5e1; letter-spacing: 0.06em; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-gradient-text, .magic-circle-bg svg, .card-entrance, .boost-pulse, .clean-card::before, .xp-shimmer, .modal-pop,
+  .gf-avatar-img, .gf-avatar-shine, .gf-breathe, .gf-speaking, .gf-orb-bob, .gf-orb-ring, .gf-orb-glow,
+  .gf-bubble, .gf-panel, .gf-msg-in, .gf-heart, .gf-send-pulse, .gf-typing-dot,
+  .aura-blob, .twinkle-star, .shooting-star, .magic-circle-bg, .crimson-spark,
+  .brand-legend-in, .header-legend-line, .legend-rise, .legend-border::after, .legendary-btn,
+  .legend-logo, .legend-timer-running, .gf-orb-ring-2,
+  .waifu-walker, .waifu-bob {
+    animation: none !important;
+    transition: none !important;
+  }
+}
