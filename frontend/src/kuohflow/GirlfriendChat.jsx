@@ -72,6 +72,8 @@ export default function GirlfriendChat({ audio, stats, user }) {
     setTimeout(() => setHearts((prev) => prev.filter((h) => !batch.some((b) => b.id === h.id))), 2800);
   }, []);
 
+  const userId = user && user.id;
+
   useEffect(() => {
     (async () => {
       const fallback = [{ id: "welcome", role: "rias", content: "Finally~ You opened this. I was starting to think the club president would have to summon you herself, darling ♥" }];
@@ -87,7 +89,8 @@ export default function GirlfriendChat({ audio, stats, user }) {
         setMessages(fallback);
       }
     })();
-  }, [user && user.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
   // Floating speech bubble — typewriter that cycles her whispers
   useEffect(() => {
