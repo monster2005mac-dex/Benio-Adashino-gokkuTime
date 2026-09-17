@@ -1441,6 +1441,8 @@ function KuohFlowApp({ onLock }) {
               </div>
             </div>
           </div>
+        )}
+
         {/* VIEW 5: MASTER PROFILE (OCCULT RESEARCH CLUB MEMBER DOSSIER) */}
         {activeTab === 'profile' && (
           <div className="space-y-6 max-w-4xl mx-auto" data-testid="master-profile-view">
