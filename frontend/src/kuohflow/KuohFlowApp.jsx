@@ -321,6 +321,7 @@ function KuohFlowApp({ onLock }) {
       syncedUidRef.current = null;
       cloudLoadedOnceRef.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUid]);
 
   // Persist tasks to this user's local storage the instant it's safe to do
